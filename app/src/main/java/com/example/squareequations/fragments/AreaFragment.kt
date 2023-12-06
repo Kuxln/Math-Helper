@@ -2,7 +2,6 @@ package com.example.squareequations.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -42,7 +41,7 @@ class AreaFragment : Fragment(R.layout.fragment_area) {
                     1 -> calculateTriangle(view)
                     2 -> calculateSphere()
                     3 -> calculateTrapeze(view)
-                    4 -> calculateCircle()
+                    4 -> calculateCircle(view)
                     5 -> calculateParallelogram()
                     6 -> calculatePyramid()
                     7 -> calculateCone()
@@ -143,8 +142,8 @@ class AreaFragment : Fragment(R.layout.fragment_area) {
                                 val a = binding.firstET.text.toString().toFloat()
                                 val b = binding.secondET.text.toString().toFloat()
                                 val c = binding.thirdET.text.toString().toFloat()
-                                val p = (a+b+c) / 2
-                                var S = sqrt(p * (p-a) * (p-b) * (p-c))
+                                val p = (a + b + c) / 2
+                                val S = sqrt(p * (p - a) * (p - b) * (p - c))
                                 binding.result.text = "S = $S"
                                 binding.result.visibility = View.VISIBLE
                             }
@@ -279,9 +278,62 @@ class AreaFragment : Fragment(R.layout.fragment_area) {
             }
     }
 
-    private fun calculateCircle() {
+    @SuppressLint("SetTextI18n")
+    private fun calculateCircle(view: View) {
+        val formulas = arrayListOf(
+            "S = π * R^2",
+            "S = (π * D^2) / 4"
+        )
+        val subArrayAdapter = ArrayAdapter(view.context, R.layout.spinner_list_item, formulas)
+        binding.subSpinnerArea.adapter = subArrayAdapter
+        binding.subSpinnerArea.visibility = View.VISIBLE
+        binding.subSpinnerArea.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?, view: View?, position: Int, id: Long
+                ) {
+                    hideViews()
+                    binding.subSpinnerArea.visibility = View.VISIBLE
+                    when (position) {
+                        0 -> {
+                            binding.formula.text = "S = π * R^2"
+                            binding.formula.visibility = View.VISIBLE
+                            binding.firstTV.text = "Enter 'R':"
+                            binding.firstET.setText("0")
+                            binding.firstET.visibility = View.VISIBLE
+                            binding.buttonCalculate.visibility = View.VISIBLE
 
+                            binding.buttonCalculate.setOnClickListener {
+                                val r = binding.firstET.text.toString().toDouble()
+                                val S = r.pow(2) * Math.PI
+                                binding.result.text = "S = $S"
+                                binding.result.visibility = View.VISIBLE
+
+                            }
+                        }
+
+                        1 -> {
+                            binding.formula.text = "S = (π * D^2) / 4"
+                            binding.formula.visibility = View.VISIBLE
+                            binding.firstTV.text = "Enter 'D':"
+                            binding.firstTV.visibility = View.VISIBLE
+                            binding.firstET.setText("0")
+                            binding.firstET.visibility = View.VISIBLE
+                            binding.buttonCalculate.visibility = View.VISIBLE
+                            binding.buttonCalculate.setOnClickListener {
+                                val d = binding.firstET.text.toString().toDouble()
+                                val S = (Math.PI * d.pow(2)) / 4
+                                binding.result.text = "S = $S"
+                                binding.result.visibility = View.VISIBLE
+                            }
+                        }
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
     }
+
 
     private fun calculateParallelogram() {
 
