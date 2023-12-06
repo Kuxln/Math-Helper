@@ -173,4 +173,15 @@
         android:text="Calculate"
         android:textColor="@color/button_text_selector" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonCopyToClipboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="70dp"
+
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_selector"
+        android:text="Copy result to clipboard"
+        android:textColor="@color/button_text_selector" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>
