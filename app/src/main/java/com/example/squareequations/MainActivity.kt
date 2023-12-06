@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.squareequations.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,22 +18,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         adapter = FragmentAdapter(this)
         binding.viewPager.adapter = adapter
-        binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (tab != null) {
-                    binding.viewPager.currentItem = tab.position
-                }
+        TabLayoutMediator(
+            binding.tabLayout, binding.viewPager
+        ) { tab, position ->
+            when (position) {
+                0 -> tab.text = "Square equation"
+                1 -> tab.text = "Area"
+                2 -> tab.text = "Volume"
             }
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-        })
-        binding.viewPager.registerOnPageChangeCallback(object: OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                binding.tabLayout.getTabAt(position)?.select()
-            }
-        })
+        }.attach()
     }
 }
