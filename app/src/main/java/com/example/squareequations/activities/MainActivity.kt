@@ -1,13 +1,15 @@
-package com.example.squareequations
+package com.example.squareequations.activities
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.example.squareequations.R
+import com.example.squareequations.core.FragmentAdapter
 import com.example.squareequations.databinding.ActivityMainBinding
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,19 +20,32 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val tabsList = intArrayOf(1,2,3,4,5)
-        tinyDB.putListInt("TABS", tabsList)
-
-        adapter = FragmentAdapter(this)
+        val tabsList = intArrayOf(1,1,1,1,0)
+        adapter = FragmentAdapter(this, tabsList)
         binding.viewPager.adapter = adapter
         TabLayoutMediator(
             binding.tabLayout, binding.viewPager
         ) { tab, position ->
-            when (position) {
+            when (tabsList[position]) {
                 0 -> tab.text = "Square equation"
                 1 -> tab.text = "Area"
                 2 -> tab.text = "Volume"
             }
         }.attach()
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.settings -> {
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> {return false}
+        }
     }
 }

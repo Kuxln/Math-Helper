@@ -1,14 +1,15 @@
-package com.example.squareequations
+package com.example.squareequations.core
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.squareequations.activities.MainActivity
 import com.example.squareequations.fragments.AreaFragment
 import com.example.squareequations.fragments.SquareEquationFragment
 import com.example.squareequations.fragments.VolumeFragment
 
 class FragmentAdapter(
     mainActivity: MainActivity,
-    private val preferredFragments: List<Int>
+    private val preferredFragments: IntArray
 ) : FragmentStateAdapter(mainActivity) {
     override fun getItemCount(): Int {
         return preferredFragments.size
