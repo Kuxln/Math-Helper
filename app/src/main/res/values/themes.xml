@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.SquareEquations" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
     <style name="text">
-        <item name="android:textSize"> 18dp</item>
+        <item name="android:textSize"> 18sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
 </resources>

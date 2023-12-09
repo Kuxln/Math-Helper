@@ -1,5 +1,6 @@
 package com.example.squareequations
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -16,6 +17,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val tabsList = intArrayOf(1,2,3,4,5)
+        tinyDB.putListInt("TABS", tabsList)
+
         adapter = FragmentAdapter(this)
         binding.viewPager.adapter = adapter
         TabLayoutMediator(

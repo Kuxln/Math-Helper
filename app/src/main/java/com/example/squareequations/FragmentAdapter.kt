@@ -6,18 +6,19 @@ import com.example.squareequations.fragments.AreaFragment
 import com.example.squareequations.fragments.SquareEquationFragment
 import com.example.squareequations.fragments.VolumeFragment
 
-class FragmentAdapter(mainActivity: MainActivity) : FragmentStateAdapter(mainActivity) {
-
+class FragmentAdapter(
+    mainActivity: MainActivity,
+    private val preferredFragments: List<Int>
+) : FragmentStateAdapter(mainActivity) {
     override fun getItemCount(): Int {
-        return 3
+        return preferredFragments.size
     }
 
     override fun createFragment(position: Int): Fragment {
-        return when (position) {
+        return when (preferredFragments[position]) {
             0 -> SquareEquationFragment()
             1 -> AreaFragment()
             2 -> VolumeFragment()
-
             else -> SquareEquationFragment()
         }
     }

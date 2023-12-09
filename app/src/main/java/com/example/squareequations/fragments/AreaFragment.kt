@@ -3,14 +3,12 @@ package com.example.squareequations.fragments
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.example.squareequations.R
 import com.example.squareequations.databinding.FragmentAreaBinding
@@ -67,7 +65,7 @@ class AreaFragment : Fragment(R.layout.fragment_area) {
                 requireActivity().applicationContext.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
             val clipData = ClipData.newPlainText("result", binding.result.text)
             clipboardManager.setPrimaryClip(clipData)
-            Toast.makeText(context, "Text copied to clipboard", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Result copied to clipboard", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -476,12 +474,12 @@ class AreaFragment : Fragment(R.layout.fragment_area) {
 
     @SuppressLint("SetTextI18n")
     private fun calculateCone() {
-
+//todo
     }
 
     @SuppressLint("SetTextI18n")
     private fun calculateCylinder() {
-
+//todo
     }
 
     @SuppressLint("SetTextI18n")
